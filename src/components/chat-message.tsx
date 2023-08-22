@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import remarkGfm from 'remark-gfm'
 import remarkMath from 'remark-math'
 import supersub from 'remark-supersub'
@@ -7,8 +8,8 @@ import { CodeBlock } from '@/components/ui/codeblock'
 import { MemoizedReactMarkdown } from '@/components/markdown'
 import { LearnMore } from './learn-more'
 import { ChatMessageModel } from '@/lib/bots/bing/types'
-import { useEffect } from 'react'
 import { TurnCounter } from './turn-counter'
+import { ChatFeedback } from './chat-feedback'
 
 export interface ChatMessageProps {
   message: ChatMessageModel
@@ -26,6 +27,7 @@ export function ChatMessage({ message, ...props }: ChatMessageProps) {
       className={cn('text-message', message.author)}
       {...props}
     >
+      <ChatFeedback text={message.text} />
       <div className="text-message-content">
         <MemoizedReactMarkdown
           linkTarget="_blank"
